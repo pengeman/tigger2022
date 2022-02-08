@@ -15,9 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText eText_cal = (EditText) findViewById(R.id.eText_cal);
-        eText_cal.setOnClickListener(new View.OnClickListener(){
-
+        Button b_cal = (Button) findViewById(R.id.b_cal);
+        b_cal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 System.out.println("sout main activity");

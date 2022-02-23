@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_cal">
+    tools:context="org.peng.calculator.Activity_cal">
 
     <TableLayout
         android:layout_width="409dp"
@@ -55,7 +55,8 @@
                 android:layout_height="fill_parent"
 
                 android:layout_weight="1"
-                android:text="8" />
+                android:drawableLeft="@android:drawable/sym_action_call"
+                android:textSize="8sp" />
 
             <Button
                 android:id="@+id/num9"

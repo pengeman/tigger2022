@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tiger2022">
         <activity
-            android:name=".Activity_cal"
+            android:name="org.peng.calculator.sa"
+            android:exported="false" />
+        <activity
+            android:name="org.peng.calculator.Activity_cal"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

@@ -1,11 +1,13 @@
-package org.peng.tiger2022;
-
-import androidx.appcompat.app.AppCompatActivity;
+package org.peng.calculator;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.peng.tiger2022.R;
 
 public class Activity_cal extends AppCompatActivity {
     private Button[] btnCommand = new Button[5];// 符号按钮

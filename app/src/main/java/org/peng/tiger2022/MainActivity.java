@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.peng.calculator.Activity_cal;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

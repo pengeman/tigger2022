@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.peng.tiger2022.R;
 
+import java.util.List;
+
 public class Activity_cal extends AppCompatActivity {
     private Button[] btnCommand = new Button[5];// 符号按钮
     private Button[] btnNum = new Button[11]; // 数字按钮
-    private EditText editText = null;// 显示区域
+    private TextView textView = null;// 显示区域
     private Button btnClear = null; // clear按钮
 
     private static String lastCommand; // 用于保存运算符
@@ -53,8 +56,8 @@ public class Activity_cal extends AppCompatActivity {
         btnNum[10] = (Button) findViewById(R.id.point);
 
         // 初始化显示结果区域
-        editText = (EditText) findViewById(R.id.Result);
-        editText.setText("0.0");
+        textView = (TextView) findViewById(R.id.Result);
+        textView.setText("0.0");
 
         // 实例化监听器对象
         NumberAction na = new NumberAction();
@@ -70,13 +73,12 @@ public class Activity_cal extends AppCompatActivity {
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editText.setText("0.0");
+                textView.setText("0.0");
                 // 初始化各项值
                 result = 0; // x的值
                 firstFlag = true; // 是首次运算
                 clearFlag = false; // 不需要清空
                 lastCommand = "="; // 运算符
-
             }
         });
     }
@@ -88,19 +90,19 @@ public class Activity_cal extends AppCompatActivity {
             Button btn = (Button) view;
             String input = btn.getText().toString();
 
-
             if (firstFlag) { // 首次输入
                 // 一上就".",就什么也不做
                 if (input.equals(".")) {
                     return;
                 }
                 // 如果是"0.0"的话,就清空
-                if (editText.getText().toString().equals("0.0")) {
-                    editText.setText("");
+                if (textView.getText().toString().equals("0.0")) {
+                    textView.setText("");
                 }
                 firstFlag = false;// 改变是否首次输入的标记值
+                System.out.println(input);
             } else {
-                String editTextStr = editText.getText().toString();
+                String editTextStr = textView.getText().toString();
                 // 判断显示区域的值里面是否已经有".",如果有,输入的又是".",就什么都不做
                 if (editTextStr.indexOf(".") != -1 && input.equals(".")) {
                     return;
@@ -117,10 +119,11 @@ public class Activity_cal extends AppCompatActivity {
 
             // 如果我点击了运算符以后,再输入数字的话,就要清空显示区域的值
             if (clearFlag) {
-                editText.setText("");
+                textView.setText("");
                 clearFlag = false;// 还原初始值,不需要清空
             }
-            editText.setText(editText.getText().toString() + input);// 设置显示区域的值
+            textView.setText(textView.getText().toString() + input);// 设置显示区域的值
+            System.out.println(textView.getText());
         }
     }
 
@@ -134,39 +137,31 @@ public class Activity_cal extends AppCompatActivity {
 
             if (firstFlag) {// 首次输入"-"的情况
                 if (inputCommand.equals("-")) {
-                    editText.setText("-");// 显示区域的内容设置为"-"
+                    textView.setText("-");// 显示区域的内容设置为"-"
                     firstFlag = false;// 改变首次输入的标记
                 }
-            } else {
-
-                if (!clearFlag) {// 如果flag=false不需要清空显示区的值,就调用方法计算
-
-                    calculate(Double.parseDouble(editText.getText().toString()));// 保存显示区域的值,并计算
-                }
+            } else if (inputCommand.equals("=")) {
+                String res = calculate(textView.getText().toString());// 保存显示区域的值,并计算
+                textView.setText(res);
+                firstFlag = true;
+            }else{
+                textView.setText(textView.getText().toString() + inputCommand);// 设置显示区域的值
+//                if (!clearFlag) {// 如果flag=false不需要清空显示区的值,就调用方法计算
+//
+//                    calculate(Double.parseDouble(editText.getText().toString()));// 保存显示区域的值,并计算
+//                }
                 // 保存你点击的运算符
                 lastCommand = inputCommand;
-                clearFlag = true;// 因为我这里已经输入过运算符,
+                //clearFlag = true;// 因为我这里已经输入过运算符,
             }
         }
     }
 
     // 计算用的方法
-    public void calculate(double x) {
-
-        // Object lastCommand = null;
-
-        if (lastCommand.equals("+")) {
-            result += x;
-        } else if (lastCommand.equals("-")) {
-            result -= x;
-        } else if (lastCommand.equals("*")) {
-            result *= x;
-        } else if (lastCommand.equals("/")) {
-            result /= x;
-        } else if (lastCommand.equals("=")) {
-            result = x;
-        }
-        editText.setText("" + result);
-
+    public String calculate(String x) {
+        List ls1 = InversePolish.zb(x);
+        List ls2 = InversePolish.parse(ls1);
+        int r = InversePolish.jisuan(ls2);
+        return r + "";
     }
 }

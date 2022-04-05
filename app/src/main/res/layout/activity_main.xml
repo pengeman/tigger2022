@@ -14,12 +14,12 @@
         android:id="@+id/b_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="计算器" />
+        android:text="日记本" />
     <Button
         android:id="@+id/b_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="计算器" />
+        android:text="生命线" />
     <Button
         android:id="@+id/b_4"
         android:layout_width="match_parent"

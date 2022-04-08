@@ -63,7 +63,7 @@ public class Activity_cal extends AppCompatActivity {
         NumberAction na = new NumberAction();
         CommandAction ca = new CommandAction();
         for (Button bc : btnCommand) {
-            bc.setOnClickListener((View.OnClickListener) ca);
+            bc.setOnClickListener(ca);
         }
         for (Button bc : btnNum) {
             bc.setOnClickListener((View.OnClickListener) na);

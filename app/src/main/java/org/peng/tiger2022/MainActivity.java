@@ -27,5 +27,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button b_F3 = findViewById(R.id.f3);
+        b_F3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, F3Activity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

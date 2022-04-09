@@ -3,6 +3,7 @@
     package="org.peng.tiger2022">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tiger2022"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name="org.peng.noteBook.NoteBookActivity"
+            android:exported="false" />
         <activity
             android:name=".F3Activity"
             android:exported="false" />
